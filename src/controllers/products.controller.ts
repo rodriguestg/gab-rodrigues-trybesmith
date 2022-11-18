@@ -13,8 +13,14 @@ class ProductController {
   public create = async (req: Request, res: Response) => {
     const product = req.body;
 
-    const productCreated = await this.productService.create(product);
-    res.status(statusCodes.CREATED).json(productCreated);
+    const { type, message } = await this.productService.create(product);
+    if (type) { 
+      if (type === 'BAD_REQUEST') {
+        return res.status(statusCodes.BAD_REQUEST).json({ message });
+      }
+      return res.status(statusCodes.BAD_VALIDATION).json({ message });
+    }
+    return res.status(statusCodes.CREATED).json(message);
   };
 }
 
