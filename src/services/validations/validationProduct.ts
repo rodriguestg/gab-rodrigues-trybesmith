@@ -1,7 +1,7 @@
 import Product from '../../interfaces/product.interface';
 import schema from './schemas';
 
-const validateUpdateProduct = (product: Product) => {
+const validateProduct = (product: Product) => {
   const { error } = schema.addProduct
     .validate(product);
   if (error) return error.message;
@@ -9,4 +9,4 @@ const validateUpdateProduct = (product: Product) => {
   return null;
 };
 
-export default validateUpdateProduct;
+export default validateProduct;

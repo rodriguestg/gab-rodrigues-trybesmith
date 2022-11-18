@@ -1,12 +1,8 @@
 import connection from '../models/connection';
 import ProductModel from '../models/product.model';
 import Product from '../interfaces/product.interface';
-import validateUpdateProduct from './validations/validationProduct';
-
-interface Message {
-  type: string | null;
-  message: string | Promise<Product>;
-}
+import validateProduct from './validations/validationProduct';
+import Message from '../interfaces/message.interface';
 
 class ProductService {
   public model: ProductModel;
@@ -21,8 +17,7 @@ class ProductService {
   }
 
   public create(product: Product): Message {
-    const vali = validateUpdateProduct(product);
-    console.log(vali);
+    const vali = validateProduct(product);
     if (vali) {
       if (vali === '"name" is required'
         || vali === '"amount" is required') return { type: 'BAD_REQUEST', message: vali };
