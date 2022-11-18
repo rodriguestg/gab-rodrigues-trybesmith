@@ -3,5 +3,5 @@ import User from './user.interface';
 
 export default interface Message {
   type: string | null;
-  message: string | Promise<Product | User>;
+  message: string | Product | User;
 }

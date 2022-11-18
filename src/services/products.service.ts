@@ -16,15 +16,17 @@ class ProductService {
     return products;
   }
 
-  public create(product: Product): Message {
+  public async create(product: Product): Promise<Message> {
     const vali = validateProduct(product);
     if (vali) {
       if (vali === '"name" is required'
         || vali === '"amount" is required') return { type: 'BAD_REQUEST', message: vali };
       return { type: 'BAD_VALIDATION', message: vali };
     }
+
+    const prod = await this.model.create(product);
     
-    return { type: null, message: this.model.create(product) };
+    return { type: null, message: prod };
   }
 }
 

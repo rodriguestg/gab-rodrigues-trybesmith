@@ -23,6 +23,7 @@ export default class ProductModel {
     );
     const [dataInserted] = result;
     const { insertId } = dataInserted;
+    
     return { id: insertId, ...product };
   }
 }

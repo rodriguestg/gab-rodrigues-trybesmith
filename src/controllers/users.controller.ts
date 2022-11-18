@@ -9,7 +9,6 @@ class UserController {
   public register = async (req: Request, res: Response) => {
     const user = req.body;
     const token = tokenGenerate(user.username);
-    // const userCreated = await this.userService.register(user);
     const { type, message } = await this.userService.register(user);
     if (type) { 
       if (type === 'BAD_REQUEST') {
@@ -17,8 +16,7 @@ class UserController {
       }
       return res.status(statusCodes.BAD_VALIDATION).json({ message });
     }
-    // if (!userCreated) return res.status(statusCodes.BAD_REQUEST).json(userCreated);
-    return res.status(statusCodes.CREATED).json({ token });
+    res.status(statusCodes.CREATED).json({ token });
   };
 }
 

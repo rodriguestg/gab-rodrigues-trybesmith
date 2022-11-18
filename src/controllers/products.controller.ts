@@ -14,6 +14,7 @@ class ProductController {
     const product = req.body;
 
     const { type, message } = await this.productService.create(product);
+    
     if (type) { 
       if (type === 'BAD_REQUEST') {
         return res.status(statusCodes.BAD_REQUEST).json({ message });
