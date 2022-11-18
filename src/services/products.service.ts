@@ -3,6 +3,7 @@ import ProductModel from '../models/product.model';
 import Product from '../interfaces/product.interface';
 import validateProduct from './validations/validationProduct';
 import Message from '../interfaces/message.interface';
+// import validateOrder from './validations/validationOrder';
 
 class ProductService {
   public model: ProductModel;
@@ -25,6 +26,12 @@ class ProductService {
     }
 
     const prod = await this.model.create(product);
+    
+    return { type: null, message: prod };
+  }
+
+  public async createByOrder(product: any, orderId: number): Promise<any> {
+    const prod = await this.model.createByOrder(product, orderId);
     
     return { type: null, message: prod };
   }

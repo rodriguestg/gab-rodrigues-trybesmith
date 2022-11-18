@@ -1,6 +1,10 @@
 import { Pool, ResultSetHeader } from 'mysql2/promise';
 import Product from '../interfaces/product.interface';
 
+export interface Haha {
+  productsIds: Array<number>;
+}
+
 export default class ProductModel {
   public connection: Pool;
 
@@ -25,5 +29,15 @@ export default class ProductModel {
     const { insertId } = dataInserted;
     
     return { id: insertId, ...product };
+  }
+
+  public async createByOrder(product: any, orderId: number): Promise<object> {
+    const [{ affectedRows }] = await this.connection.execute<ResultSetHeader>(
+      'UPDATE Trybesmith.Products SET orderId = ? WHERE id = ?',
+      [orderId, product],
+    );
+    console.log(affectedRows);
+    
+    return { userId: orderId, product };
   }
 }

@@ -12,7 +12,12 @@ const addUser = Joi.object({
   password: Joi.string().min(8).required(),
 });
 
+const addOrder = Joi.object({
+  productsIds: Joi.array().min(1).required(),
+});
+
 export default {
   addProduct,
   addUser,
+  addOrder,
 };

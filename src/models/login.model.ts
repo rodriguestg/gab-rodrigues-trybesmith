@@ -17,7 +17,6 @@ export default class LoginModel {
     );
 
     if (result.length === 0) return null;
-    console.log(result);
 
     return { id: result[0].id, username, password };
   }

@@ -1,11 +1,19 @@
 import 'dotenv/config';
-import jwt, { JwtPayload } from 'jsonwebtoken';
-import 'express-async-errors';
+import jwt from 'jsonwebtoken';
 
 const secret = process.env.JWT_SECRET || 'seusecretdetoken';
 
-export default (token: string): JwtPayload | string => {
-  const data = jwt.verify(token, secret);
-  console.log(data);
-  return data;
+interface JwtPayload {
+  id: number | null;
+}
+
+export default (token: string): JwtPayload | any => {
+  try {
+    const data = jwt.verify(token, secret) as JwtPayload;
+    if (!data) return { id: null };
+    const { id } = data;
+    return { id };
+  } catch (error) {
+    return error;
+  }
 };

@@ -4,5 +4,5 @@ import User from './user.interface';
 
 export default interface Message {
   type: string | null;
-  message: Login | string | Product | User;
+  message: number | Login | string | Product | User;
 }
